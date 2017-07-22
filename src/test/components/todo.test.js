@@ -20,6 +20,7 @@ describe('Todo test suite', () => {
     it('should have state updated on handleAddTodo', () => {
         const todo = shallow(<Todo />);
 
+        console.log(todo.state());
         const length = todo.state('todos').length;
 
         todo.instance().handleAddTodo('test');

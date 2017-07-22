@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
-
-import 'foundation-sites/dist/css/foundation.min.css';
-import 'foundation-sites/dist/css/foundation-float.min.css';
-import './styles/app.scss';
+import { create as createJss } from 'jss';
+import { JssProvider, ThemeProvider } from 'react-jss';
+import jssNested from 'jss-nested';
+import camelCase from 'jss-camel-case';
 
 import Header from './components/Header';
 import { Todo } from './components/Todo';
 
+import 'foundation-sites/dist/css/foundation.min.css';
+import 'foundation-sites/dist/css/foundation-float.min.css';
+
+import Colors from './utils/Colors';
+
+const jss = createJss();
+jss.use(jssNested());
+jss.use(camelCase());
 
 class App extends Component {
     render() {
         return (
-            <div>
-                <Header title="Todo" />
-                <Todo />
-            </div>
+            <ThemeProvider theme={Colors}>
+                <JssProvider jss={jss}>
+                    <div>
+                        <Header title="My awesome todo app" />
+                        <Todo />
+                    </div>
+                </JssProvider>
+            </ThemeProvider>
         );
     }
 }

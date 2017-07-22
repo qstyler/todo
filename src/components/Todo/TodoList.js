@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
+
 import TodoItem from './TodoItem';
+import injectSheet from './Styles';
 
 class TodoList extends Component {
     render() {
-        const { todos, onToggle, searchText, searchCompleted } = this.props;
+        const {
+            todos, onToggle, searchText, searchCompleted, classes
+        } = this.props;
+
+        const filteredTodos = todos
+            .filter(todo =>
+                (searchCompleted || !todo.completed)
+                && todo.text.toLowerCase().includes(searchText.toLowerCase())
+            );
 
         const ListOfTodos =
-            todos
-                .filter(todo =>
-                    (searchCompleted || !todo.completed)
-                    && todo.text.toLowerCase().includes(searchText.toLowerCase())
-                )
-                .map(todo => (
-                    <TodoItem
-                        key={todo.id}
-                        onToggle={onToggle}
-                        {...todo}
-                    />
-                ));
+            !filteredTodos.length
+                ? <p className={classes.containerMessage}>Nothing to do</p>
+                : filteredTodos
+                    .map(todo => (
+                        <TodoItem
+                            key={todo.id}
+                            onToggle={onToggle}
+                            {...todo}
+                        />
+                    ));
 
         return (
             <div>
@@ -42,4 +50,4 @@ TodoList.defaultProps = {
     onToggle: () => {},
 };
 
-export default TodoList;
+export default injectSheet(TodoList);

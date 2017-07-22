@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 import moment from 'moment';
+import { Row, Column } from 'react-foundation';
 
 import TodoList from './TodoList';
 import SearchTodo from './SearchTodo';
 import AddTodo from './AddTodo';
 
 import TodoAPI from '../../api/TodoAPI';
+
+import injectSheet from './Styles';
 
 class Todo extends Component {
 
@@ -69,21 +72,26 @@ class Todo extends Component {
 
     render() {
         const { todos, search } = this.state;
+        const { classes } = this.props;
         return (
-            <div>
-                <SearchTodo onChanged={this.handleSearch} />
+            <Row>
+                <Column small={11} medium={6} large={5} centerOnSmall>
+                    <div className={classes.container}>
+                        <SearchTodo onChanged={this.handleSearch} />
 
-                <TodoList
-                    todos={todos}
-                    onToggle={this.handleToggle}
-                    {...search}
-                />
+                        <TodoList
+                            todos={todos}
+                            onToggle={this.handleToggle}
+                            {...search}
+                        />
 
-                <AddTodo onTodoAdded={this.handleAddTodo} />
-            </div>
+                        <AddTodo onTodoAdded={this.handleAddTodo} />
+                    </div>
+                </Column>
+            </Row>
         );
     }
 }
 
 
-export default Todo;
+export default injectSheet(Todo);

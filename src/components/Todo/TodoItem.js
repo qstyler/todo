@@ -2,21 +2,32 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+import injectSheet from './Styles';
+
 class TodoItem extends Component {
     render() {
-        const { id, text, completed, createdAt, completedAt } = this.props;
-        const renderDate = (date) => moment.unix(date).format('Do MMM YYYY @ HH:mm');
+        const {
+            id, text, completed, createdAt, completedAt, classes,
+        } = this.props;
+
+        const renderDate = (completed, created) => {
+            return (completed ? 'Completed at ' : 'Created at ')
+                + moment.unix(completed || created).format('Do MMM YYYY @ HH:mm');
+        };
+
+        const className = `${classes.todo} ${completed ? classes.todoCompleted : ''}`;
 
         return (
-            <label>
+            <label className={className}>
                 <input
                     type="checkbox"
                     checked={completed}
                     onChange={() => this.props.onToggle(id)}
                 />
-                <div>{text}</div>
-                <div>{renderDate(createdAt)}</div>
-                {completedAt ? <div>{renderDate(completedAt)}</div> : null}
+                <div>
+                    <p>{text}</p>
+                    <p className={classes.todoSubtext}>{renderDate(completedAt, createdAt)}</p>
+                </div>
             </label>
         );
     }
@@ -35,4 +46,4 @@ TodoItem.defaultProps = {
     completed: false,
 };
 
-export default TodoItem;
+export default injectSheet(TodoItem);

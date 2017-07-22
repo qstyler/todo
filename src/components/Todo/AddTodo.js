@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Colors } from 'react-foundation';
 
+import injectSheet from './Styles';
+
 class AddTodo extends Component {
 
     constructor(props, context) {
@@ -24,8 +26,12 @@ class AddTodo extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
-            <form onSubmit={this.handleAddTodo}>
+            <form
+                onSubmit={this.handleAddTodo}
+                className={classes.containerFooter}
+            >
                 <input type="text" ref="text" />
                 <Button color={Colors.PRIMARY} isExpanded>Add</Button>
             </form>
@@ -38,4 +44,4 @@ AddTodo.propTypes = {
 };
 AddTodo.defaultProps = {};
 
-export default AddTodo;
+export default injectSheet(AddTodo);

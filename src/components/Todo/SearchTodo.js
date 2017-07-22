@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
-class SearchTodo extends Component {
+import injectSheet from './Styles';
 
+class SearchTodo extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -18,9 +19,9 @@ class SearchTodo extends Component {
     }
 
     render() {
-        const { placeholder } = this.props;
+        const { placeholder, classes } = this.props;
         return (
-            <div>
+            <div className={classes.containerHeader}>
                 <div>
                     <input
                         type="search"
@@ -52,4 +53,4 @@ SearchTodo.defaultProps = {
     placeholder: 'Search todos'
 };
 
-export default SearchTodo;
+export default injectSheet(SearchTodo);
