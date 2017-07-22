@@ -12,7 +12,7 @@ describe('Todo test suite', () => {
     });
     it("should have all children", () => {
         const todo = shallow(<Todo />);
-        expect(todo).toContainReact(<SearchTodo />);
+        expect(todo.find(SearchTodo)).toBeTruthy();
         expect(todo.find(AddTodo)).toBeTruthy();
     });
 });

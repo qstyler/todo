@@ -5,10 +5,21 @@ import TodoItem from './TodoItem';
 
 class TodoList extends Component {
     render() {
-        const { todos } = this.props;
+        const { todos, searchText, searchCompleted } = this.props;
+
+        const ListOfTodos =
+            todos
+                .filter(todo =>
+                    (searchCompleted || !todo.completed)
+                    && todo.text.toLowerCase().includes(searchText.toLowerCase())
+                )
+                .map(todo => (
+                    <TodoItem key={todo.id} {...todo} />
+                ));
+
         return (
             <div>
-                {todos.map(todo => <TodoItem key={todo.id} {...todo} />)}
+                {ListOfTodos}
             </div>
         );
     }
@@ -16,8 +27,13 @@ class TodoList extends Component {
 
 TodoList.propTypes = {
     todos: PropTypes.array.isRequired,
+    searchCompleted: PropTypes.bool,
+    searchText: PropTypes.string,
 };
 
-TodoList.defaultProps = {};
+TodoList.defaultProps = {
+    searchCompleted: false,
+    searchText: '',
+};
 
 export default TodoList;
