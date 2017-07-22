@@ -9,7 +9,11 @@ describe('Todolist test suite', () => {
         expect(shallow(<TodoList todos={[]} />)).toBeTruthy();
     });
     it('should have TodoItems rendered', () => {
-        const wrapper = mount(<TodoList todos={[{ id: 1, text: 'text' }]} />);
-        expect(wrapper.find(TodoItem)).toHaveLength(1);
+        const todos = [
+            { id: 1, text: 'text' },
+            { id: 2, text: 'text 2' },
+        ];
+        const wrapper = mount(<TodoList todos={todos} />);
+        expect(wrapper.find(TodoItem)).toHaveLength(2);
     });
 });
