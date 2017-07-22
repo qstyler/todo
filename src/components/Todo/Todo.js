@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+
 import TodoList from './TodoList';
+import SearchTodo from './SearchTodo';
+import AddTodo from './AddTodo';
 
 class Todo extends Component {
 
@@ -23,13 +25,13 @@ class Todo extends Component {
         const { todos } = this.state;
         return (
             <div>
+                <SearchTodo />
                 <TodoList todos={todos} />
+                <AddTodo />
             </div>
         );
     }
 }
 
-Todo.propTypes = {};
-Todo.defaultProps = {};
 
 export default Todo;
