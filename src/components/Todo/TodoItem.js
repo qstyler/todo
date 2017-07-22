@@ -20,10 +20,12 @@ class TodoItem extends Component {
 TodoItem.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    completed: PropTypes.bool,
     onToggle: PropTypes.func,
 };
 TodoItem.defaultProps = {
     onToggle: () => {},
+    completed: false,
 };
 
 export default TodoItem;

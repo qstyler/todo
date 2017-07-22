@@ -15,6 +15,18 @@ describe('Todoitem test suite', () => {
         expect(wrapper).toIncludeText(text);
     });
 
+    describe('checkbox suite', () => {
+        it('should render checked when completed', () => {
+            const wrapper = mount(<TodoItem completed={true} id='' text='' onToggle={() => {}} />);
+            expect(wrapper.find('input')).toHaveProp('checked', true);
+        });
+
+        it('should render not checked when completed', () => {
+            const wrapper = mount(<TodoItem completed={false} id='' text='' onToggle={() => {}} />);
+            expect(wrapper.find('input')).toHaveProp('checked', false);
+        });
+    });
+
     it('should call onToggle function', () => {
         const id = '1337';
         const text = 'weeaboo';

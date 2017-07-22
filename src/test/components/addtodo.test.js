@@ -9,13 +9,13 @@ describe('AddTodo test suite', () => {
         expect(AddTodo).toBeTruthy();
     });
 
-    it("should have an input and a button rendered", () => {
+    it('should have an input and a button rendered', () => {
         const addTodo = shallow(<AddTodo onTodoAdded={() => {}} />);
         expect(addTodo.find(Button)).toBeTruthy();
         expect(addTodo.find('input')).toBeTruthy();
     });
 
-    it("should not call the handler", () => {
+    it('should not call the handler', () => {
         const spy = jest.fn();
         const addTodo = shallow(<AddTodo onTodoAdded={spy} />);
 
@@ -23,7 +23,7 @@ describe('AddTodo test suite', () => {
         expect(spy).not.toBeCalled();
     });
 
-    it("should call the handler", () => {
+    it('should call the handler', () => {
         const spy = jest.fn();
         const addTodo = mount(<AddTodo onTodoAdded={spy} />);
 
