@@ -42,10 +42,7 @@ class Todo extends Component {
         const todo = { id: newId, completed: false, text: text };
         console.log(`added todo`, todo);
 
-        const { todos } = this.state;
-        todos.push(todo);
-
-        this.setState({ todos: todos });
+        this.setState({ todos: [...this.state.todos, this.state] });
     }
 
     getNewId() {
