@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import TodoItem from '../../components/Todo/Todoitem';
@@ -13,6 +13,18 @@ describe('Todoitem test suite', () => {
 
         expect(wrapper).toBeTruthy();
         expect(wrapper).toIncludeText(text);
-        expect(wrapper).toIncludeText(id);
+    });
+
+    it('should call onToggle function', () => {
+        const id = '1337';
+        const text = 'weeaboo';
+        const spy = jest.fn();
+
+        const wrapper = mount(<TodoItem id={id} text={text} onToggle={spy} />);
+
+        wrapper.find('input').simulate('change');
+
+        expect(spy).toBeCalledWith(id);
+
     });
 });

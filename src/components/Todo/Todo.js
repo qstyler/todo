@@ -12,6 +12,7 @@ class Todo extends Component {
 
         this.handleAddTodo = this.handleAddTodo.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
 
         this.state = {
             todos: [
@@ -51,12 +52,31 @@ class Todo extends Component {
         });
     }
 
+    handleToggle(id) {
+        const updatedState = this.state.todos
+            .map(todo => ({
+                    ...todo,
+                    completed: !!(todo.id === id ^ todo.completed)
+                })
+            )
+        ;
+        this.setState({
+            todos: updatedState,
+        })
+    }
+
     render() {
         const { todos, search } = this.state;
         return (
             <div>
                 <SearchTodo onChanged={this.handleSearch} />
-                <TodoList todos={todos} {...search} />
+
+                <TodoList
+                    todos={todos}
+                    onToggle={this.handleToggle}
+                    {...search}
+                />
+
                 <AddTodo onTodoAdded={this.handleAddTodo} />
             </div>
         );

@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 
 class TodoItem extends Component {
     render() {
-        const { id, text } = this.props;
+        const { id, text, completed } = this.props;
         return (
-            <div>
-                <div>{id}. {text}</div>
-            </div>
+            <label>
+                <input
+                    type="checkbox"
+                    checked={completed}
+                    onChange={() => this.props.onToggle(id)}
+                />
+                {text}
+            </label>
         );
     }
 }
@@ -15,7 +20,10 @@ class TodoItem extends Component {
 TodoItem.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    onToggle: PropTypes.func,
 };
-TodoItem.defaultProps = {};
+TodoItem.defaultProps = {
+    onToggle: () => {},
+};
 
 export default TodoItem;
