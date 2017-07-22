@@ -11,7 +11,8 @@ describe('Todo test suite', () => {
         expect(shallow(<Todo />)).toBeTruthy();
     });
     it("should have all children", () => {
-        expect(shallow(<Todo />)).toContainReact(<SearchTodo />);
-        expect(shallow(<Todo />)).toContainReact(<AddTodo />);
+        const todo = shallow(<Todo />);
+        expect(todo).toContainReact(<SearchTodo />);
+        expect(todo.find(AddTodo)).toBeTruthy();
     });
 });

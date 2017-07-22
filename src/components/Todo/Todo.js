@@ -6,8 +6,11 @@ import AddTodo from './AddTodo';
 
 class Todo extends Component {
 
+
     constructor(props, context) {
         super(props, context);
+
+        this.handleAddTodo = this.handleAddTodo.bind(this);
 
         this.state = {
             todos: [
@@ -21,13 +24,28 @@ class Todo extends Component {
         };
     }
 
+    handleAddTodo(text) {
+        const newId = this.getNewId();
+        const todo = { id: newId, text: text };
+        console.log(`added todo`, todo);
+
+        const { todos } = this.state;
+        todos.push(todo);
+
+        this.setState({ todos: todos });
+    }
+
+    getNewId() {
+        return Math.max(...this.state.todos.map(todo => todo.id)) + 1;
+    }
+
     render() {
         const { todos } = this.state;
         return (
             <div>
                 <SearchTodo />
                 <TodoList todos={todos} />
-                <AddTodo />
+                <AddTodo onTodoAdded={this.handleAddTodo} />
             </div>
         );
     }

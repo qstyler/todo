@@ -1,0 +1,38 @@
+import React from 'react'
+import { mount, shallow } from 'enzyme';
+import { Button } from 'react-foundation';
+
+import { AddTodo } from '../../components/Todo';
+
+describe('AddTodo test suite', () => {
+    it('AddTodo should be true', () => {
+        expect(AddTodo).toBeTruthy();
+    });
+
+    it("should have an input and a button rendered", () => {
+        const addTodo = shallow(<AddTodo onTodoAdded={() => {}} />);
+        expect(addTodo.find(Button)).toBeTruthy();
+        expect(addTodo.find('input')).toBeTruthy();
+    });
+
+    it("should not call the handler", () => {
+        const spy = jest.fn();
+        const addTodo = shallow(<AddTodo onTodoAdded={spy} />);
+
+        addTodo.find(Button).simulate('submit');
+        expect(spy).not.toBeCalled();
+    });
+
+    it("should call the handler", () => {
+        const spy = jest.fn();
+        const addTodo = mount(<AddTodo onTodoAdded={spy} />);
+
+
+        const input = addTodo.ref('text');
+        input.node.value = 'asd';
+        input.simulate('change', input);
+
+        addTodo.find(Button).simulate('submit');
+        expect(spy).toBeCalled();
+    });
+});
