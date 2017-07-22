@@ -4,7 +4,10 @@ const setTodos = (todos) => {
     }
 };
 
-const getTodos = () => JSON.parse(localStorage.getItem('todos') || '[]');
+const getTodos = () => {
+    const todos = JSON.parse(localStorage.getItem('todos') || '[]');
+    return Array.isArray(todos) ? todos : [];
+};
 
 export default { setTodos, getTodos };
 
