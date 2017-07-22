@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { mount } from 'enzyme';
 
 import App from '../App';
 
@@ -13,10 +12,9 @@ describe('Whole app suite', () => {
         ReactDOM.render(<App />, div);
     });
 
-    it("should just work", () => {
-        const app = mount(<App />);
-
-
+    describe('testing whole flow', () => {
+        //const app =
+            mount(<App />);
 
     });
 });

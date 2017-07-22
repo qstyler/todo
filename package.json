@@ -16,7 +16,8 @@
     "jest-enzyme": "^3.5.3",
     "react-scripts": "1.0.10",
     "react-test-renderer": "15.6.1",
-    "prop-types": "latest"
+    "prop-types": "latest",
+    "jest-localstorage-mock": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

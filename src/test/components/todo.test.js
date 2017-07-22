@@ -1,6 +1,5 @@
 import React from 'react'
 import { shallow } from 'enzyme';
-import 'jest-enzyme';
 
 import { Todo } from '../../components/Todo';
 import { SearchTodo } from '../../components/Todo';
