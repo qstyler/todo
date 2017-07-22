@@ -29,10 +29,12 @@ describe('AddTodo test suite', () => {
 
 
         const input = addTodo.ref('text');
-        input.node.value = 'asd';
+        const inputText = 'asd';
+
+        input.node.value = inputText;
         input.simulate('change', input);
 
         addTodo.find(Button).simulate('submit');
-        expect(spy).toBeCalled();
+        expect(spy).toBeCalledWith(inputText);
     });
 });
