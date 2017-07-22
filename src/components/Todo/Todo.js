@@ -39,11 +39,16 @@ class Todo extends Component {
     }
 
     handleAddTodo(text) {
-        const newUuid = uuid();
-        const todo = { id: newUuid, completed: false, text: text };
-        console.log(`added todo`, todo);
-
-        this.setState({ todos: [...this.state.todos, this.state] });
+        this.setState({
+            todos: [
+                ...this.state.todos,
+                {
+                    id: uuid(),
+                    completed: false,
+                    text: text
+                }
+            ]
+        });
     }
 
     render() {
