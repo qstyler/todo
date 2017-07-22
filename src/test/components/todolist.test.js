@@ -14,6 +14,6 @@ describe('Todolist test suite', () => {
             { id: 2, text: 'text 2' },
         ];
         const wrapper = mount(<TodoList todos={todos} />);
-        expect(wrapper.find(TodoItem)).toHaveLength(2);
+        expect(wrapper.find(TodoItem)).toHaveLength(todos.length);
     });
 });
