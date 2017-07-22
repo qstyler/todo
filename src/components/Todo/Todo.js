@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
+import moment from 'moment';
 
 import TodoList from './TodoList';
 import SearchTodo from './SearchTodo';
@@ -45,7 +46,9 @@ class Todo extends Component {
                 {
                     id: uuid(),
                     completed: false,
-                    text: text
+                    text: text,
+                    createdAt: moment().unix(),
+                    completedAt: undefined,
                 }
             ]
         });
@@ -55,10 +58,10 @@ class Todo extends Component {
         const updatedState = this.state.todos
             .map(todo => ({
                     ...todo,
-                    completed: !!(todo.id === id ^ todo.completed)
+                    completed: !!(todo.id === id ^ todo.completed),
+                    completedAt: todo.completed ? undefined : moment().unix(),
                 })
-            )
-        ;
+            );
         this.setState({
             todos: updatedState,
         })
