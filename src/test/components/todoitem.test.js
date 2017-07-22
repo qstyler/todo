@@ -6,7 +6,7 @@ import TodoItem from '../../components/Todo/Todoitem';
 
 describe('Todoitem test suite', () => {
     it('Todoitem should be true', () => {
-        const id = 1337;
+        const id = '1337';
         const text = 'weeaboo';
 
         const wrapper = shallow(<TodoItem id={id} text={text} />);

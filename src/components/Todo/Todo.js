@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import uuid from 'uuid/v4';
 
 import TodoList from './TodoList';
 import SearchTodo from './SearchTodo';
@@ -14,12 +15,12 @@ class Todo extends Component {
 
         this.state = {
             todos: [
-                { id: 1, completed: false, text: 'Get married' },
-                { id: 2, completed: false, text: 'Buy a house' },
-                { id: 3, completed: false, text: 'Get settled in' },
-                { id: 4, completed: false, text: 'Furniture and so on' },
-                { id: 5, completed: false, text: 'Just wait for a bit' },
-                { id: 6, completed: true, text: 'Eat properly: 3 hot meals a day' },
+                { id: uuid(), completed: false, text: 'Get married' },
+                { id: uuid(), completed: false, text: 'Buy a house' },
+                { id: uuid(), completed: false, text: 'Get settled in' },
+                { id: uuid(), completed: false, text: 'Furniture and so on' },
+                { id: uuid(), completed: false, text: 'Just wait for a bit' },
+                { id: uuid(), completed: true, text: 'Eat properly: 3 hot meals a day' },
             ],
             search: {
                 searchText: '',
@@ -38,15 +39,11 @@ class Todo extends Component {
     }
 
     handleAddTodo(text) {
-        const newId = this.getNewId();
-        const todo = { id: newId, completed: false, text: text };
+        const newUuid = uuid();
+        const todo = { id: newUuid, completed: false, text: text };
         console.log(`added todo`, todo);
 
         this.setState({ todos: [...this.state.todos, this.state] });
-    }
-
-    getNewId() {
-        return Math.max(...this.state.todos.map(todo => todo.id)) + 1;
     }
 
     render() {

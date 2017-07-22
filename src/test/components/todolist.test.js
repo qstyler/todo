@@ -11,8 +11,8 @@ describe('Todolist test suite', () => {
 
     it('should have TodoItems rendered', () => {
         const todos = [
-            { id: 1, completed: false, text: 'text' },
-            { id: 2, completed: false, text: 'text 2' },
+            { id: '1', completed: false, text: 'text' },
+            { id: '2', completed: false, text: 'text 2' },
         ];
         const wrapper = mount(<TodoList todos={todos} />);
         expect(wrapper.find(TodoItem)).toHaveLength(todos.length);
@@ -22,8 +22,8 @@ describe('Todolist test suite', () => {
     describe('filtering todo items', () => {
         it('should filter completed todos', () => {
             const todos = [
-                { id: 1, completed: false, text: 'text' },
-                { id: 2, completed: true, text: 'text 2' },
+                { id: '1', completed: false, text: 'text' },
+                { id: '2', completed: true, text: 'text 2' },
             ];
 
             const wrapper = mount(<TodoList todos={todos} />);
@@ -33,8 +33,8 @@ describe('Todolist test suite', () => {
 
         it('should  NOT filter todos when searchCompleted is true', () => {
             const todos = [
-                { id: 1, completed: false, text: 'text' },
-                { id: 2, completed: true, text: 'text 2' },
+                { id: '1', completed: false, text: 'text' },
+                { id: '2', completed: true, text: 'text 2' },
             ];
 
             const wrapper = mount(<TodoList todos={todos} searchCompleted={true} />);
@@ -44,8 +44,8 @@ describe('Todolist test suite', () => {
 
         it('should filter todos when text is passed', () => {
             const todos = [
-                { id: 1, completed: false, text: 'text' },
-                { id: 2, completed: false, text: 'text 2' },
+                { id: '1', completed: false, text: 'text' },
+                { id: '2', completed: false, text: 'text 2' },
             ];
 
             const wrapper = mount(<TodoList todos={todos} searchText="2" />);
