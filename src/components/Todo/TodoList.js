@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 import injectSheet from './Styles';
 
-class TodoList extends Component {
+export class TodoList extends Component {
     render() {
         const {
             todos, onToggle, searchText, searchCompleted, classes

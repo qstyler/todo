@@ -1,12 +1,12 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { TodoList } from '../../components/Todo';
+import { TodoList } from '../../components/Todo/TodoList';
 import { TodoItem } from '../../components/Todo';
 
 describe('Todolist test suite', () => {
     it('Todolist should be true', () => {
-        expect(shallow(<TodoList todos={[]} />)).toBeTruthy();
+        expect(shallow(<TodoList classes={{}} todos={[]} />)).toBeTruthy();
     });
 
     it('should have TodoItems rendered', () => {
@@ -14,7 +14,7 @@ describe('Todolist test suite', () => {
             { id: '1', completed: false, text: 'text' },
             { id: '2', completed: false, text: 'text 2' },
         ];
-        const wrapper = mount(<TodoList todos={todos} />);
+        const wrapper = shallow(<TodoList classes={{}} todos={todos} />);
         expect(wrapper.find(TodoItem)).toHaveLength(todos.length);
     });
 
@@ -26,7 +26,7 @@ describe('Todolist test suite', () => {
                 { id: '2', completed: true, text: 'text 2' },
             ];
 
-            const wrapper = mount(<TodoList todos={todos} />);
+            const wrapper = shallow(<TodoList classes={{}} todos={todos} />);
 
             expect(wrapper.find(TodoItem)).toHaveLength(1);
         });
@@ -37,7 +37,7 @@ describe('Todolist test suite', () => {
                 { id: '2', completed: true, text: 'text 2' },
             ];
 
-            const wrapper = mount(<TodoList todos={todos} searchCompleted={true} />);
+            const wrapper = shallow(<TodoList classes={{}} todos={todos} searchCompleted={true} />);
 
             expect(wrapper.find(TodoItem)).toHaveLength(todos.length);
         });
@@ -48,7 +48,7 @@ describe('Todolist test suite', () => {
                 { id: '2', completed: false, text: 'text 2' },
             ];
 
-            const wrapper = mount(<TodoList todos={todos} searchText='2' />);
+            const wrapper = shallow(<TodoList classes={{}} todos={todos} searchText='2' />);
 
             expect(wrapper.find(TodoItem)).toHaveLength(1);
         });
