@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import injectSheet from './Styles';
 
-class TodoItem extends Component {
+export class TodoItem extends Component {
     render() {
         const {
             id, text, completed, createdAt, completedAt, classes,
