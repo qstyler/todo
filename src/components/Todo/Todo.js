@@ -11,7 +11,7 @@ import TodoAPI from '../../api/TodoAPI';
 
 import injectSheet from './Styles';
 
-class Todo extends Component {
+export class Todo extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -19,6 +19,7 @@ class Todo extends Component {
         this.handleAddTodo = this.handleAddTodo.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleToggle = this.handleToggle.bind(this);
+        this.todos = this.todos.bind(this);
 
         this.state = {
             todos: TodoAPI.getTodos(),
@@ -30,7 +31,7 @@ class Todo extends Component {
     }
 
     componentDidUpdate() {
-        TodoAPI.setTodos(this.state.todos);
+        TodoAPI.setTodos(this.todos());
     }
 
     handleSearch(text, showAll) {
@@ -42,10 +43,14 @@ class Todo extends Component {
         })
     }
 
+    todos() {
+        return this.state.todos || [];
+    }
+
     handleAddTodo(text) {
         this.setState({
             todos: [
-                ...this.state.todos,
+                ...this.todos(),
                 {
                     id: uuid(),
                     completed: false,
@@ -58,7 +63,7 @@ class Todo extends Component {
     }
 
     handleToggle(id) {
-        const updatedState = this.state.todos
+        const updatedState = this.todos()
             .map(todo => ({
                     ...todo,
                     completed: !!(todo.id === id ^ todo.completed),

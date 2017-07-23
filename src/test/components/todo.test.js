@@ -1,35 +1,37 @@
-import React from 'react'
-import { shallow } from 'enzyme';
+import React from 'react';
+import { mount, shallow } from 'enzyme';
 import uuid from 'uuid/v4';
 
-import { Todo } from '../../components/Todo';
+import { ThemeProvider } from 'react-jss';
+
+import { Todo } from '../../components/Todo/Todo';
 import { SearchTodo } from '../../components/Todo';
 import { AddTodo } from '../../components/Todo';
 
 describe('Todo test suite', () => {
     it('Todo should be true', () => {
-        expect(shallow(<Todo />)).toBeTruthy();
+        expect(shallow(<Todo classes={{}} />)).toBeTruthy();
     });
 
     it('should have all children', () => {
-        const todo = shallow(<Todo />);
+        const todo = shallow(<Todo classes={{}} />);
         expect(todo.find(SearchTodo)).toBeTruthy();
         expect(todo.find(AddTodo)).toBeTruthy();
     });
 
     it('should have state updated on handleAddTodo', () => {
-        const todo = shallow(<Todo />);
 
-        console.log(todo.state());
-        const length = todo.state('todos').length;
+        const todo = shallow(<Todo classes={{}} />);
+
+        const length = todo.instance().todos().length;
 
         todo.instance().handleAddTodo('test');
 
-        expect(todo.state('todos')).toHaveLength(length + 1);
+        expect(todo.instance().todos()).toHaveLength(length + 1);
     });
 
     it('should toggle completed status on a state', () => {
-        const todo = shallow(<Todo />);
+        const todo = shallow(<Todo classes={{}} />);
         const id = uuid();
 
         todo.setState({
