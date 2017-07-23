@@ -4,7 +4,7 @@ import { Button, Colors } from 'react-foundation';
 
 import injectSheet from './Styles';
 
-class AddTodo extends Component {
+export class AddTodo extends Component {
 
     constructor(props, context) {
         super(props, context);

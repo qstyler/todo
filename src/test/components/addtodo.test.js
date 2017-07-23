@@ -2,7 +2,7 @@ import React from 'react'
 import { mount, shallow } from 'enzyme';
 import { Button } from 'react-foundation';
 
-import { AddTodo } from '../../components/Todo';
+import { AddTodo } from '../../components/Todo/AddTodo';
 
 describe('AddTodo test suite', () => {
     it('AddTodo should be true', () => {
@@ -10,14 +10,14 @@ describe('AddTodo test suite', () => {
     });
 
     it('should have an input and a button rendered', () => {
-        const addTodo = shallow(<AddTodo onTodoAdded={() => {}} />);
+        const addTodo = shallow(<AddTodo classes={{}} onTodoAdded={() => {}} />);
         expect(addTodo.find(Button)).toBeTruthy();
         expect(addTodo.find('input')).toBeTruthy();
     });
 
     it('should not call the handler', () => {
         const spy = jest.fn();
-        const addTodo = shallow(<AddTodo onTodoAdded={spy} />);
+        const addTodo = shallow(<AddTodo classes={{}} onTodoAdded={spy} />);
 
         addTodo.find(Button).simulate('submit');
         expect(spy).not.toBeCalled();
@@ -25,7 +25,7 @@ describe('AddTodo test suite', () => {
 
     it('should call the handler', () => {
         const spy = jest.fn();
-        const addTodo = mount(<AddTodo onTodoAdded={spy} />);
+        const addTodo = mount(<AddTodo classes={{}} onTodoAdded={spy} />);
 
 
         const input = addTodo.ref('text');
