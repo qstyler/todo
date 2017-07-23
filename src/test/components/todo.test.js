@@ -1,8 +1,6 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import uuid from 'uuid/v4';
-
-import { ThemeProvider } from 'react-jss';
 
 import { Todo } from '../../components/Todo/Todo';
 import { SearchTodo } from '../../components/Todo';
