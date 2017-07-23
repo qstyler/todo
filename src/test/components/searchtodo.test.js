@@ -1,18 +1,18 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme';
 
-import { SearchTodo } from '../../components/Todo';
+import { SearchTodo } from '../../components/Todo/SearchTodo';
 
 describe('Searchtodo test suite', () => {
     it('Searchtodo should be true', () => {
-        expect(shallow(<SearchTodo onChanged={() => {}} />)).toBeTruthy();
+        expect(shallow(<SearchTodo classes={{}} onChanged={() => {}} />)).toBeTruthy();
     });
 
     describe('onSearch handler', () => {
 
         it('should call onSearch handler when text is changed', () => {
             const spy = jest.fn();
-            const wrapper = mount(<SearchTodo onChanged={spy} />);
+            const wrapper = mount(<SearchTodo classes={{}} onChanged={spy} />);
             const input = wrapper.ref('searchText');
 
             const searchText = 'test';
@@ -25,7 +25,7 @@ describe('Searchtodo test suite', () => {
 
         it('should call onSearch handler when checkbox triggered', () => {
             const spy = jest.fn();
-            const wrapper = mount(<SearchTodo onChanged={spy} />);
+            const wrapper = mount(<SearchTodo classes={{}} onChanged={spy} />);
             const input = wrapper.ref('searchAll');
 
             input.node.checked = true;

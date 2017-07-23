@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import injectSheet from './Styles';
 
-class SearchTodo extends Component {
+export class SearchTodo extends Component {
 
     constructor(props, context) {
         super(props, context);
