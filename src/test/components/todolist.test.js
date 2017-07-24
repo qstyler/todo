@@ -31,13 +31,13 @@ describe('Todolist test suite', () => {
             expect(wrapper.find(TodoItem)).toHaveLength(1);
         });
 
-        it('should  NOT filter todos when searchCompleted is true', () => {
+        it('should  NOT filter todos when searchAll is true', () => {
             const todos = [
                 { id: '1', completed: false, text: 'text' },
                 { id: '2', completed: true, text: 'text 2' },
             ];
 
-            const wrapper = shallow(<TodoList classes={{}} todos={todos} searchCompleted={true} />);
+            const wrapper = shallow(<TodoList classes={{}} todos={todos} searchAll={true} />);
 
             expect(wrapper.find(TodoItem)).toHaveLength(todos.length);
         });

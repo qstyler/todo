@@ -45,8 +45,8 @@ TodoList.defaultProps = {
 
 const mapStateToProps = (state) => ({
     todos: state.todos,
-    searchText: state.searchText,
-    searchAll: state.searchAll,
+    searchText: state.searchText || '',
+    searchAll: !!state.searchAll,
 });
 
 export default connect(mapStateToProps)(injectSheet(TodoList));
