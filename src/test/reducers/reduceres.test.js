@@ -70,16 +70,36 @@ describe('reducers test suite', () => {
                 type: Types.TOGGLE_TODO,
             };
 
-            const res = reducers.todos(df(todos), df({id, ...action}));
+            const res = reducers.todos(df(todos), df({ id, ...action }));
 
             expect(res[0].completed).toBeFalsy();
             expect(res[0].completedAt).toBeUndefined();
 
             id += 1;
-            const res2 = reducers.todos(df(todos), df({id, ...action}));
+            const res2 = reducers.todos(df(todos), df({ id, ...action }));
             expect(res2[0].completed).toBeTruthy();
 
         });
+    });
+
+    it('should add new todo_S_', () => {
+        const todos = [
+            'don\'t worry',
+            'be happy',
+        ];
+
+        const action = {
+            type: Types.ADD_TODOS,
+            todos,
+        };
+
+        const res = reducers.todos(df([]), df(action));
+
+        expect(res).toHaveLength(2);
+
+        expect(res[0]).toHaveProperty('text', todos[0]);
+        expect(res[1]).toHaveProperty('text', todos[1]);
+
     });
 
 });

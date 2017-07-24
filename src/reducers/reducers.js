@@ -21,17 +21,24 @@ export const searchAll = (state = false, action) => {
 };
 
 export const todos = (state = [], action) => {
+    const newTodo = (text) => ({
+        id: uuid(),
+        completed: false,
+        text: text,
+        createdAt: moment().unix(),
+        completedAt: undefined,
+    });
+
     switch (action.type) {
         case Types.ADD_TODO:
             return [
                 ...state,
-                {
-                    id: uuid(),
-                    completed: false,
-                    text: action.text,
-                    createdAt: moment().unix(),
-                    completedAt: undefined,
-                }
+                newTodo(action.text)
+            ];
+        case Types.ADD_TODOS:
+            return [
+                ...state,
+                ...action.todos.map((text) => newTodo(text))
             ];
         case Types.TOGGLE_TODO:
             return state.map(todo => ({
