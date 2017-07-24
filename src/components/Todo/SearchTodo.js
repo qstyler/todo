@@ -1,25 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import {
+    toggleSearchAll as toggleSearchAllAction,
+    setSearchText as setSearchTextAction,
+} from '../../actions/actions';
+
 
 import injectSheet from './Styles';
 
 export class SearchTodo extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange() {
-        const searchText = this.refs.searchText.value.trim();
-        const searchAll = this.refs.searchAll.checked;
-
-        this.props.onChanged(searchText, searchAll);
-    }
-
     render() {
-        const { placeholder, classes } = this.props;
+        const { placeholder, classes, dispatch } = this.props;
         return (
             <div className={classes.containerHeader}>
                 <div>
@@ -27,7 +21,7 @@ export class SearchTodo extends Component {
                         type="search"
                         ref="searchText"
                         placeholder={placeholder}
-                        onChange={this.handleChange}
+                        onChange={() => dispatch(setSearchTextAction(this.refs.searchText.value))}
                     />
                 </div>
                 <div>
@@ -35,7 +29,7 @@ export class SearchTodo extends Component {
                         <input
                             type="checkbox"
                             ref="searchAll"
-                            onChange={this.handleChange}
+                            onChange={() => dispatch(toggleSearchAllAction())}
                         />
                         Show all items
                     </label>
@@ -46,11 +40,10 @@ export class SearchTodo extends Component {
 }
 
 SearchTodo.propTypes = {
-    onChanged: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
 };
 SearchTodo.defaultProps = {
     placeholder: 'Search todos'
 };
 
-export default injectSheet(SearchTodo);
+export default connect()(injectSheet(SearchTodo));

@@ -19,7 +19,7 @@ describe('actions test suite', () => {
     });
 
     it('should generate toggle show completed', () => {
-        expect(actions.toggleShowCompleted()).toEqual({
+        expect(actions.toggleSearchAll()).toEqual({
             type: Types.TOGGLE_SEARCH_ALL,
         });
     });

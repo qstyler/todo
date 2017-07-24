@@ -10,7 +10,7 @@ export const addTodo = (text) => ({
     text
 });
 
-export const toggleShowCompleted = () => ({
+export const toggleSearchAll = () => ({
     type: Types.TOGGLE_SEARCH_ALL,
 });
 

@@ -1,80 +1,23 @@
 import React, { Component } from 'react';
-import uuid from 'uuid/v4';
-import moment from 'moment';
 import { Row, Column } from 'react-foundation';
 
 import TodoList from './TodoList';
 import SearchTodo from './SearchTodo';
 import AddTodo from './AddTodo';
 
-import TodoAPI from '../../api/TodoAPI';
-
 import injectSheet from './Styles';
 
 export class Todo extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleAddTodo = this.handleAddTodo.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
-        this.todos = this.todos.bind(this);
-
-        this.state = {
-            todos: TodoAPI.getTodos(),
-            search: {
-                searchText: '',
-                searchCompleted: false,
-            }
-        };
-    }
-
-    componentDidUpdate() {
-        TodoAPI.setTodos(this.todos());
-    }
-
-    handleSearch(text, showAll) {
-        this.setState({
-            search: {
-                searchText: text,
-                searchCompleted: showAll,
-            }
-        })
-    }
-
-    todos() {
-        return this.state.todos || [];
-    }
-
-    handleAddTodo(text) {
-        this.setState({
-            todos: [
-                ...this.todos(),
-                {
-                    id: uuid(),
-                    completed: false,
-                    text: text,
-                    createdAt: moment().unix(),
-                    completedAt: undefined,
-                }
-            ]
-        });
-    }
-
-
     render() {
-        const { todos, search } = this.state;
         const { classes } = this.props;
         return (
             <Row>
                 <Column small={11} medium={6} large={5} centerOnSmall>
                     <div className={classes.container}>
-                        <SearchTodo onChanged={this.handleSearch} />
+                        <SearchTodo />
 
-                        <TodoList
-                            todos={todos}
-                            {...search}
-                        />
+                        <TodoList />
 
                         <AddTodo />
                     </div>
