@@ -10,6 +10,11 @@ export const addTodo = (text) => ({
     text
 });
 
+export const addTodos = (todos) => ({
+    type: Types.ADD_TODOS,
+    todos
+});
+
 export const toggleSearchAll = () => ({
     type: Types.TOGGLE_SEARCH_ALL,
 });

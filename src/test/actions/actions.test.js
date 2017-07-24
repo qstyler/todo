@@ -18,6 +18,14 @@ describe('actions test suite', () => {
         });
     });
 
+    it('should generate add todoS', () => {
+        const todos = ['don\'t worry', 'be happy'];
+        expect(actions.addTodos(todos)).toEqual({
+            type: Types.ADD_TODOS,
+            todos,
+        });
+    });
+
     it('should generate toggle show completed', () => {
         expect(actions.toggleSearchAll()).toEqual({
             type: Types.TOGGLE_SEARCH_ALL,
@@ -31,4 +39,6 @@ describe('actions test suite', () => {
             id
         });
     });
+
+
 });
