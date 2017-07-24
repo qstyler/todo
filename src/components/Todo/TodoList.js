@@ -9,7 +9,7 @@ import injectSheet from './Styles';
 export class TodoList extends Component {
     render() {
         const {
-            todos, onToggle, searchText, searchCompleted, classes
+            todos, searchText, searchCompleted, classes
         } = this.props;
 
         const filteredTodos = todos
@@ -25,7 +25,6 @@ export class TodoList extends Component {
                     .map(todo => (
                         <TodoItem
                             key={todo.id}
-                            onToggle={onToggle}
                             {...todo}
                         />
                     ));
