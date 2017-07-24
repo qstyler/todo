@@ -18,7 +18,6 @@ export class Todo extends Component {
 
         this.handleAddTodo = this.handleAddTodo.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-        this.handleToggle = this.handleToggle.bind(this);
         this.todos = this.todos.bind(this);
 
         this.state = {
@@ -62,18 +61,6 @@ export class Todo extends Component {
         });
     }
 
-    handleToggle(id) {
-        const updatedState = this.todos()
-            .map(todo => ({
-                    ...todo,
-                    completed: !!(todo.id === id ^ todo.completed),
-                    completedAt: todo.completed ? undefined : moment().unix(),
-                })
-            );
-        this.setState({
-            todos: updatedState,
-        })
-    }
 
     render() {
         const { todos, search } = this.state;
@@ -86,7 +73,6 @@ export class Todo extends Component {
 
                         <TodoList
                             todos={todos}
-                            onToggle={this.handleToggle}
                             {...search}
                         />
 

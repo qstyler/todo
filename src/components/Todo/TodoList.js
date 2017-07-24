@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 
 import TodoItem from './TodoItem';
@@ -41,13 +42,15 @@ TodoList.propTypes = {
     todos: PropTypes.array.isRequired,
     searchCompleted: PropTypes.bool,
     searchText: PropTypes.string,
-    onToggle: PropTypes.func,
 };
 
 TodoList.defaultProps = {
     searchCompleted: false,
     searchText: '',
-    onToggle: () => {},
 };
 
-export default injectSheet(TodoList);
+const mapStateToProps = (state) => ({
+    todos: state.todos,
+});
+
+export default connect(mapStateToProps)(injectSheet(TodoList));

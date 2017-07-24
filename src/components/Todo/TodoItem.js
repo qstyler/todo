@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+
+import { toggleTodo as toggleTodoAction } from '../../actions/actions';
 
 import injectSheet from './Styles';
 
 export class TodoItem extends Component {
     render() {
         const {
-            id, text, completed, createdAt, completedAt, classes,
+            id, text, completed, createdAt, completedAt, classes, dispatch
         } = this.props;
 
         const renderDate = (completed, created) => {
@@ -22,7 +25,7 @@ export class TodoItem extends Component {
                 <input
                     type="checkbox"
                     checked={completed}
-                    onChange={() => this.props.onToggle(id)}
+                    onChange={() => dispatch(toggleTodoAction(id))}
                 />
                 <div>
                     <p>{text}</p>
@@ -37,13 +40,12 @@ TodoItem.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool,
-    onToggle: PropTypes.func,
     createdAt: PropTypes.number,
     completedAt: PropTypes.number,
 };
 TodoItem.defaultProps = {
-    onToggle: () => {},
     completed: false,
 };
 
-export default injectSheet(TodoItem);
+const mapStateToProps = (state) => ({});
+export default connect()(injectSheet(TodoItem));

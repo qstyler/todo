@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+
 import { create as createJss } from 'jss';
 import { JssProvider, ThemeProvider } from 'react-jss';
 import jssNested from 'jss-nested';
@@ -20,19 +22,24 @@ const jss = createJss();
 jss.use(jssNested());
 jss.use(camelCase());
 
+
 const store = configure();
+
+store.dispatch(actions.addTodo('Do a barrel roll'));
 
 class App extends Component {
     render() {
         return (
-            <ThemeProvider theme={Colors}>
-                <JssProvider jss={jss}>
-                    <div>
-                        <Header title="My awesome todo app" />
-                        <Todo />
-                    </div>
-                </JssProvider>
-            </ThemeProvider>
+            <Provider store={store}>
+                <ThemeProvider theme={Colors}>
+                    <JssProvider jss={jss}>
+                        <div>
+                            <Header title="My awesome todo app" />
+                            <Todo />
+                        </div>
+                    </JssProvider>
+                </ThemeProvider>
+            </Provider>
         );
     }
 }
