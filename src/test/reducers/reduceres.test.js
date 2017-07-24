@@ -32,7 +32,7 @@ describe('reducers test suite', () => {
                 type: Types.TOGGLE_SEARCH_ALL,
             };
 
-            expect(reducers.toggleSearchAll(df(false), df(action))).toBeTruthy();
+            expect(reducers.searchAll(df(false), df(action))).toBeTruthy();
         });
 
         it('should not toggle search all', () => {
@@ -40,7 +40,7 @@ describe('reducers test suite', () => {
                 type: Math.random().toString(),
             };
 
-            expect(reducers.toggleSearchAll(df(false), df(action))).toBeFalsy();
+            expect(reducers.searchAll(df(false), df(action))).toBeFalsy();
         });
     });
 

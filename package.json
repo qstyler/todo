@@ -4,16 +4,18 @@
   "private": true,
   "dependencies": {
     "foundation-sites": "^6.4.1",
+    "jss-camel-case": "latest",
+    "jss-nested": "latest",
     "moment": "^2.18.1",
     "pad-left": "^2.1.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-foundation": "^0.8.2",
     "react-jss": "^7.0.2",
+    "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
-    "uuid": "latest",
-    "jss-nested": "latest",
-    "jss-camel-case": "latest"
+    "redux": "^3.7.2",
+    "uuid": "latest"
   },
   "devDependencies": {
     "deep-freeze": "0.0.1",
@@ -22,7 +24,8 @@
     "jest-localstorage-mock": "latest",
     "prop-types": "latest",
     "react-scripts": "1.0.10",
-    "react-test-renderer": "15.6.1"
+    "react-test-renderer": "15.6.1",
+    "redux-devtools-extension": "^2.13.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -11,7 +11,7 @@ export const searchText = (state = '', action) => {
     }
 };
 
-export const toggleSearchAll = (state = false, action) => {
+export const searchAll = (state = false, action) => {
     switch (action.type) {
         case Types.TOGGLE_SEARCH_ALL:
             return !state;
