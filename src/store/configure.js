@@ -14,7 +14,6 @@ export const configure = () => {
     store.subscribe(() => {
         const state = store.getState();
 
-        console.log('setting todos:', state.todos);
         TodoAPI.setTodos(state.todos);
     });
 
