@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme';
 
 import { TodoItem } from '../../components/Todo/Todoitem';
+import { toggleTodo } from '../../actions/actions';
 
 describe('Todoitem test suite', () => {
     it('Todoitem should be true', () => {
@@ -31,11 +32,11 @@ describe('Todoitem test suite', () => {
         const text = 'weeaboo';
         const spy = jest.fn();
 
-        const wrapper = shallow(<TodoItem classes={{}} id={id} text={text} onToggle={spy} />);
+        const wrapper = shallow(<TodoItem id={id} text={text} dispatch={spy} classes={{}} />);
 
         wrapper.find('input').simulate('change');
 
-        expect(spy).toBeCalledWith(id);
-
+        expect(spy).toBeCalledWith(toggleTodo(id));
     });
+
 });
