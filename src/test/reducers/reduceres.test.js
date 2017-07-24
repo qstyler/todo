@@ -84,8 +84,8 @@ describe('reducers test suite', () => {
 
     it('should add new todo_S_', () => {
         const todos = [
-            'don\'t worry',
-            'be happy',
+            { text: 'don\'t worry' },
+            { text: 'be happy' },
         ];
 
         const action = {
@@ -97,8 +97,8 @@ describe('reducers test suite', () => {
 
         expect(res).toHaveLength(2);
 
-        expect(res[0]).toHaveProperty('text', todos[0]);
-        expect(res[1]).toHaveProperty('text', todos[1]);
+        expect(res[0]).toHaveProperty('text', todos[0].text);
+        expect(res[1]).toHaveProperty('text', todos[1].text);
 
     });
 

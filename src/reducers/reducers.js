@@ -38,7 +38,7 @@ export const todos = (state = [], action) => {
         case Types.ADD_TODOS:
             return [
                 ...state,
-                ...action.todos.map((text) => newTodo(text))
+                ...action.todos,
             ];
         case Types.TOGGLE_TODO:
             return state.map(todo => ({

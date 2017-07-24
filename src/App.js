@@ -9,7 +9,6 @@ import camelCase from 'jss-camel-case';
 import Header from './components/Header';
 import { Todo } from './components/Todo';
 
-import * as actions from './actions/actions';
 import { configure } from './store/configure';
 
 // styles
