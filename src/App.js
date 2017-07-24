@@ -23,14 +23,10 @@ jss.use(jssNested());
 jss.use(camelCase());
 
 
-const store = configure();
-
-store.dispatch(actions.addTodo('Do a barrel roll'));
-
 class App extends Component {
     render() {
         return (
-            <Provider store={store}>
+            <Provider store={configure()}>
                 <ThemeProvider theme={Colors}>
                     <JssProvider jss={jss}>
                         <div>

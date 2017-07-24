@@ -76,7 +76,7 @@ export class Todo extends Component {
                             {...search}
                         />
 
-                        <AddTodo onTodoAdded={this.handleAddTodo} />
+                        <AddTodo />
                     </div>
                 </Column>
             </Row>

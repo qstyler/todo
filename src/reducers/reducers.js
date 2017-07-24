@@ -37,7 +37,9 @@ export const todos = (state = [], action) => {
             return state.map(todo => ({
                     ...todo,
                     completed: !!(todo.id === action.id ^ todo.completed),
-                    completedAt: todo.completed ? undefined : moment().unix(),
+                completedAt: todo.id === action.id
+                    ? todo.completed ? undefined : moment().unix()
+                    : todo.completed,
                 })
             );
         default:

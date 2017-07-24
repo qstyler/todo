@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Button, Colors } from 'react-foundation';
+
+import { addTodo as addTodoAction } from '../../actions/actions';
 
 import injectSheet from './Styles';
 
@@ -15,11 +17,13 @@ export class AddTodo extends Component {
     handleAddTodo(e) {
         e.preventDefault();
 
+        const { dispatch } = this.props;
+
         const text = this.refs.text.value.trim();
 
         if (text !== '') {
             this.refs.text.value = '';
-            this.props.onTodoAdded(text);
+            dispatch(addTodoAction(text));
         } else {
             this.refs.text.focus();
         }
@@ -39,9 +43,7 @@ export class AddTodo extends Component {
     }
 }
 
-AddTodo.propTypes = {
-    onTodoAdded: PropTypes.func.isRequired,
-};
+AddTodo.propTypes = {};
 AddTodo.defaultProps = {};
 
-export default injectSheet(AddTodo);
+export default connect()(injectSheet(AddTodo));
