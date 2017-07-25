@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Colors } from 'react-foundation';
 
-import { addTodo as addTodoAction } from '../../actions/actions';
+import { startAddTodo as addTodoAction } from '../../actions/actions';
 
 import injectSheet from './Styles';
 

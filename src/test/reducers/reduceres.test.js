@@ -49,7 +49,7 @@ describe('reducers test suite', () => {
             const text = 'weeaboo';
             const action = {
                 type: Types.ADD_TODO,
-                text: text,
+                todo: { text },
             };
 
             const actual = reducers.todos(df([]), df(action));

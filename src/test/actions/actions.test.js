@@ -12,9 +12,9 @@ describe('actions test suite', () => {
 
     it('should generate add todo', () => {
         const text = 'be happy';
-        expect(actions.addTodo(text)).toEqual({
+        expect(actions.addTodo({ text })).toMatchObject({
             type: Types.ADD_TODO,
-            text,
+            todo: { text },
         });
     });
 

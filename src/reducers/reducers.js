@@ -21,19 +21,12 @@ export const searchAll = (state = false, action) => {
 };
 
 export const todos = (state = [], action) => {
-    const newTodo = (text) => ({
-        id: uuid(),
-        completed: false,
-        text: text,
-        createdAt: moment().unix(),
-        completedAt: undefined,
-    });
 
     switch (action.type) {
         case Types.ADD_TODO:
             return [
                 ...state,
-                newTodo(action.text)
+                action.todo
             ];
         case Types.ADD_TODOS:
             return [

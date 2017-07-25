@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "firebase": "^4.1.4",
     "foundation-sites": "^6.4.1",
     "jss-camel-case": "latest",
     "jss-nested": "latest",
@@ -25,7 +26,8 @@
     "prop-types": "latest",
     "react-scripts": "1.0.10",
     "react-test-renderer": "15.6.1",
-    "redux-devtools-extension": "^2.13.2"
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,6 @@
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
 import * as reducers from '../reducers/reducers';
 import { addTodos as addTodosAction } from '../actions/actions';
@@ -9,7 +10,10 @@ import TodoAPI from '../api/TodoAPI';
 export const configure = () => {
     const reducer = combineReducers(reducers);
 
-    const store = createStore(reducer, devToolsEnhancer());
+    const store = createStore(reducer, compose(
+        applyMiddleware(thunk),
+        devToolsEnhancer(),
+    ));
 
     store.subscribe(() => {
         const state = store.getState();

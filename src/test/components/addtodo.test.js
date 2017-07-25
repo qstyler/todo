@@ -35,6 +35,6 @@ describe('AddTodo test suite', () => {
         input.simulate('change', input);
 
         addTodo.find(Button).simulate('submit');
-        expect(spy).toBeCalledWith(addTodoAction(inputText));
+        expect(spy).toBeCalledWith(expect.any(Function));
     });
 });
