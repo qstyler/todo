@@ -47,5 +47,4 @@ TodoItem.defaultProps = {
     completed: false,
 };
 
-const mapStateToProps = (state) => ({});
 export default connect()(injectSheet(TodoItem));

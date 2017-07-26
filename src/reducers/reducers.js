@@ -1,5 +1,4 @@
 import Types from '../actions/Types';
-import uuid from 'uuid/v4';
 import moment from 'moment';
 
 export const searchText = (state = '', action) => {
