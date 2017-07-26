@@ -1,5 +1,11 @@
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
 import * as actions from '../../actions/actions';
 import Types from '../../actions/Types';
+
+
+const createMockStore = configureMockStore([thunk]);
 
 describe('actions test suite', () => {
     it('should set search text', () => {
@@ -16,6 +22,22 @@ describe('actions test suite', () => {
             type: Types.ADD_TODO,
             todo: { text },
         });
+    });
+
+    it('should should create todo and dispatch add todo', (done) => {
+
+        const store = createMockStore({});
+        const text = 'weeaboo';
+
+        return store
+            .dispatch(actions.startAddTodo(text))
+            .then(() => {
+                const storeActions = store.getActions();
+                expect(storeActions).toHaveLength(1);
+                expect(storeActions[0]).toMatchObject(actions.addTodo({ text }));
+                done();
+            })
+            .catch((e) => done.fail(e));
     });
 
     it('should generate add todoS', () => {
