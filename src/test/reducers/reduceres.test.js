@@ -58,7 +58,7 @@ describe('reducers test suite', () => {
             expect(actual[0].text).toBe(text);
         });
 
-        it('should add new todo', () => {
+        it('should update todo', () => {
             let id = 1337;
 
             const todos = [{
@@ -67,7 +67,8 @@ describe('reducers test suite', () => {
             }];
 
             const action = {
-                type: Types.TOGGLE_TODO,
+                type: Types.UPDATE_TODO,
+                updates: { completed: false }
             };
 
             const res = reducers.todos(df(todos), df({ id, ...action }));

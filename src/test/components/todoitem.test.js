@@ -32,11 +32,11 @@ describe('Todoitem test suite', () => {
         const text = 'weeaboo';
         const spy = jest.fn();
 
-        const wrapper = shallow(<TodoItem id={id} text={text} dispatch={spy} classes={{}} />);
+        const wrapper = shallow(<TodoItem id={id} dispatch={spy} text={text} classes={{}} />);
 
         wrapper.find('input').simulate('change');
 
-        expect(spy).toBeCalledWith(toggleTodo(id));
+        expect(spy).toBeCalledWith(expect.any(Function));
     });
 
 });

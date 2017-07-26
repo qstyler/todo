@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import { toggleTodo as toggleTodoAction } from '../../actions/actions';
+import { startSetTodoCompleted } from '../../actions/actions';
 
 import injectSheet from './Styles';
 
@@ -25,7 +25,7 @@ export class TodoItem extends Component {
                 <input
                     type="checkbox"
                     checked={completed}
-                    onChange={() => dispatch(toggleTodoAction(id))}
+                    onChange={() => dispatch(startSetTodoCompleted(id, !completed))}
                 />
                 <div>
                     <p>{text}</p>

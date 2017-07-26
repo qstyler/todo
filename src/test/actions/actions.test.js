@@ -40,6 +40,40 @@ describe('actions test suite', () => {
             .catch((e) => done.fail(e));
     });
 
+    it('should call UPDATE_TODO action', async (done) => {
+        const store = createMockStore({});
+        const text = 'weeaboo 2';
+        const completed = true;
+
+        const id = await store
+            .dispatch(actions.startAddTodo(text))
+            .then(() => store.getActions()[0].todo.id);
+
+        return store
+            .dispatch(actions.startSetTodoCompleted(id, completed))
+            .then(() => {
+                const storeActions = store.getActions();
+                expect(storeActions).toHaveLength(2);
+                expect(storeActions[1]).toMatchObject(actions.updateTodo(id, { completed }));
+                done();
+            }).catch((e) => done.fail(e));
+    });
+
+    it('should call TODO_NOT_FOUND action on invalid id', (done) => {
+        const store = createMockStore();
+        const id = Math.ceil(999 * Math.random()).toString();
+
+        return store
+            .dispatch(actions.startSetTodoCompleted(id, true))
+            .then(() => {
+                const storeActions = store.getActions();
+                expect(storeActions).toHaveLength(1);
+                expect(storeActions[0]).toMatchObject(actions.todoNotFound(id));
+                done();
+            })
+            .catch((e) => done.fail(e));
+    });
+
     it('should generate add todoS', () => {
         const todos = ['don\'t worry', 'be happy'];
         expect(actions.addTodos(todos)).toEqual({
@@ -51,14 +85,6 @@ describe('actions test suite', () => {
     it('should generate toggle show completed', () => {
         expect(actions.toggleSearchAll()).toEqual({
             type: Types.TOGGLE_SEARCH_ALL,
-        });
-    });
-
-    it('should generate toggle todo', () => {
-        const id = 1337;
-        expect(actions.toggleTodo(id)).toEqual({
-            type: Types.TOGGLE_TODO,
-            id
         });
     });
 

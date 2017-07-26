@@ -1,5 +1,4 @@
 import Types from '../actions/Types';
-import moment from 'moment';
 
 export const searchText = (state = '', action) => {
     switch (action.type) {
@@ -32,15 +31,15 @@ export const todos = (state = [], action) => {
                 ...state,
                 ...action.todos,
             ];
-        case Types.TOGGLE_TODO:
-            return state.map(todo => ({
-                    ...todo,
-                    completed: !!(todo.id === action.id ^ todo.completed),
-                completedAt: todo.id === action.id
-                    ? todo.completed ? undefined : moment().unix()
-                    : todo.completed,
-                })
-            );
+        case Types.UPDATE_TODO:
+            return state
+                .map(todo => ({
+                        ...todo,
+                        ...(todo.id === action.id ? action.updates : {}),
+                    })
+                );
+        case Types.TODO_NOT_FOUND:
+            return state.filter((todo) => todo.id !== action.id);
         default:
             return state;
     }
