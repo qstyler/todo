@@ -34,6 +34,8 @@ export const startAddTodo = (text) => (dispatch) => {
 export const startAddTodos = () => (dispatch) => {
     const todoRef = firebaseRef.child('todos');
 
+    dispatch(startLoading());
+
     return todoRef
         .once('value')
         .then((snapshot) => {
@@ -45,6 +47,7 @@ export const startAddTodos = () => (dispatch) => {
                 const todos = items.map((item, i) => ({ id: ids[i], ...item }));
 
                 dispatch(addTodos(todos));
+                setTimeout(() => dispatch(stopLoading()))
             }
         });
 };
@@ -89,3 +92,6 @@ export const startSetTodoCompleted = (id, completed) => async (dispatch) => {
         return dispatch(todoNotFound(id));
     }
 };
+
+export const startLoading = () => ({ type: Types.START_LOADING });
+export const stopLoading = () => ({ type: Types.STOP_LOADING });
