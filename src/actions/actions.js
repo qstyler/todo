@@ -36,18 +36,18 @@ export const startAddTodos = () => (dispatch) => {
 
     dispatch(startLoading());
 
-    return todoRef
-        .once('value')
-        .then((snapshot) => {
-            const value = snapshot.val() || {};
-            const items = Object.values(value);
-            const ids = Object.keys(value);
+    const update = (snapshot) => {
+        const value = snapshot.val() || {};
+        const items = Object.values(value);
+        const ids = Object.keys(value);
 
-            const todos = items.map((item, i) => ({ id: ids[i], ...item }));
+        const todos = items.map((item, i) => ({ id: ids[i], ...item }));
 
-            dispatch(addTodos(todos));
-            setTimeout(() => dispatch(stopLoading()))
-        });
+        dispatch(addTodos(todos));
+        setTimeout(() => dispatch(stopLoading()))
+    };
+
+    return todoRef.on('value', update);
 };
 
 export const addTodos = (todos) => ({
