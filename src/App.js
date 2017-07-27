@@ -16,16 +16,20 @@ import 'foundation-sites/dist/css/foundation.min.css';
 import 'foundation-sites/dist/css/foundation-float.min.css';
 
 import Colors from './utils/Colors';
+import { startAddTodos } from './actions/actions';
 
 const jss = createJss();
 jss.use(jssNested());
 jss.use(camelCase());
 
 
+const store = configure();
+store.dispatch(startAddTodos());
+
 class App extends Component {
     render() {
         return (
-            <Provider store={configure()}>
+            <Provider store={store}>
                 <ThemeProvider theme={Colors}>
                     <JssProvider jss={jss}>
                         <div>

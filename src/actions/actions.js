@@ -1,5 +1,5 @@
 import Types from './Types';
-import { firebaseRef } from '../firebase/index';
+import { firebaseRef } from '../firebase';
 import moment from 'moment';
 
 const newTodo = (text) => ({
@@ -29,6 +29,24 @@ export const startAddTodo = (text) => (dispatch) => {
             ...todo,
         }))
     });
+};
+
+export const startAddTodos = () => (dispatch) => {
+    const todoRef = firebaseRef.child('todos');
+
+    return todoRef
+        .once('value')
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const value = snapshot.val();
+                const items = Object.values(value);
+                const ids = Object.keys(value);
+
+                const todos = items.map((item, i) => ({ id: ids[i], ...item }));
+
+                dispatch(addTodos(todos));
+            }
+        });
 };
 
 export const addTodos = (todos) => ({

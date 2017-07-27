@@ -44,3 +44,14 @@ export const todos = (state = [], action) => {
             return state;
     }
 };
+
+export const loading = (state = false, action) => {
+    switch (action.type) {
+        case Types.START_LOADING:
+            return true;
+        case Types.STOP_LOADING:
+            return false;
+        default:
+            return state;
+    }
+};
