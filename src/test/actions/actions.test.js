@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import * as actions from '../../actions/actions';
 import Types from '../../actions/Types';
 
+import { firebaseRef } from '../../firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
@@ -41,13 +42,23 @@ describe('actions test suite', () => {
 
     describe('firebase actions tests', () => {
 
-        beforeEach((done) => {
+        const clearDatabase = function (done) {
+            firebaseRef.child('todos').remove()
+                .then(() => {
+                    firebaseRef.child('todos').push();
+                })
+                .then(done)
+                .catch((err) => done.fail(err))
+        };
 
+        beforeAll((done) => {
+            clearDatabase(done);
         });
 
         afterEach((done) => {
-
+            clearDatabase(done);
         });
+
 
         it('should should create todo and dispatch add todo', (done) => {
 
@@ -72,8 +83,13 @@ describe('actions test suite', () => {
                 .dispatch(actions.startAddTodos())
                 .then(() => {
                     const storeActions = store.getActions();
-                    expect(storeActions).toHaveLength(1);
-                    expect(storeActions[0].type).toBe(Types.ADD_TODOS);
+                    expect(storeActions).toContainEqual(
+                        expect.objectContaining(
+                            actions.addTodos(
+                                expect.any(Array)
+                            )
+                        )
+                    );
                     done();
                 })
                 .catch((err) => done.fail(err));
