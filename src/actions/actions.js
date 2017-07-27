@@ -31,10 +31,24 @@ export const startAddTodo = (text) => (dispatch) => {
     });
 };
 
-export const startAddTodos = () => (dispatch) => {
+export const initialize = () => (dispatch) => {
     const todoRef = firebaseRef.child('todos');
 
     dispatch(startLoading());
+
+    todoRef.on('child_changed', (snapshot) => {
+        const updates = snapshot.val();
+        const id = snapshot.key;
+
+        dispatch(updateTodo(id, updates));
+    });
+
+    todoRef.on('child_added', (snapshot) => {
+        const updates = snapshot.val();
+        const id = snapshot.key;
+
+        dispatch(addTodo({ id, ...updates }));
+    });
 
     const update = (snapshot) => {
         const value = snapshot.val() || {};
@@ -47,7 +61,7 @@ export const startAddTodos = () => (dispatch) => {
         setTimeout(() => dispatch(stopLoading()))
     };
 
-    return todoRef.on('value', update);
+    return todoRef.once('value').then(update);
 };
 
 export const addTodos = (todos) => ({
