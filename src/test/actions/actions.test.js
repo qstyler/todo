@@ -80,7 +80,7 @@ describe('actions test suite', () => {
             const store = createMockStore();
 
             store
-                .dispatch(actions.startAddTodos())
+                .dispatch(actions.initialize())
                 .then(() => {
                     const storeActions = store.getActions();
                     expect(storeActions).toContainEqual(
