@@ -20,7 +20,7 @@ import 'foundation-sites/dist/css/foundation.min.css';
 import 'foundation-sites/dist/css/foundation-float.min.css';
 
 import Colors from './utils/Colors';
-import { initialize } from './actions/actions';
+import { initialize } from './firebase/initialize';
 
 const jss = createJss();
 jss.use(jssNested());

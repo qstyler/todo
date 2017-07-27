@@ -16,7 +16,7 @@ class Header extends Component {
                 <TopBarRight>
                     <Menu className={classes.titleMenu}>
                         <MenuItem>
-                            <a href="#">Logout</a>
+                            <a href="">Logout</a>
                         </MenuItem>
                     </Menu>
                 </TopBarRight>

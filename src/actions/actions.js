@@ -1,5 +1,5 @@
 import Types from './Types';
-import { firebaseRef } from '../firebase';
+import firebase, { firebaseRef, githubProvider } from '../firebase';
 import moment from 'moment';
 
 const newTodo = (text) => ({
@@ -19,49 +19,10 @@ export const addTodo = (todo) => ({
     todo
 });
 
-export const startAddTodo = (text) => (dispatch) => {
+export const startAddTodo = (text) => () => {
     const todo = newTodo(text);
-    const todoRef = firebaseRef.child('todos').push(todo);
 
-    return todoRef.then(() => {
-        dispatch(addTodo({
-            id: todoRef.key,
-            ...todo,
-        }))
-    });
-};
-
-export const initialize = () => (dispatch) => {
-    const todoRef = firebaseRef.child('todos');
-
-    dispatch(startLoading());
-
-    todoRef.on('child_changed', (snapshot) => {
-        const updates = snapshot.val();
-        const id = snapshot.key;
-
-        dispatch(updateTodo(id, updates));
-    });
-
-    todoRef.on('child_added', (snapshot) => {
-        const updates = snapshot.val();
-        const id = snapshot.key;
-
-        dispatch(addTodo({ id, ...updates }));
-    });
-
-    const update = (snapshot) => {
-        const value = snapshot.val() || {};
-        const items = Object.values(value);
-        const ids = Object.keys(value);
-
-        const todos = items.map((item, i) => ({ id: ids[i], ...item }));
-
-        dispatch(addTodos(todos));
-        setTimeout(() => dispatch(stopLoading()))
-    };
-
-    return todoRef.once('value').then(update);
+    return firebaseRef.child('todos').push(todo);
 };
 
 export const addTodos = (todos) => ({
@@ -97,12 +58,31 @@ export const startSetTodoCompleted = (id, completed) => async (dispatch) => {
             completedAt: completed ? moment().unix() : null,
         };
 
-        return await todoRef
-            .update(updates)
-            .then(() => dispatch(updateTodo(id, { completed })))
+        return todoRef.update(updates)
     } else {
         return dispatch(todoNotFound(id));
     }
+};
+
+export const startLogin = () => () => {
+    return firebase
+        .auth()
+        .signInWithPopup(githubProvider)
+        .then((result) => {
+            console.log('Auth worked', result);
+        })
+        .catch((error) => {
+            console.log('Unable to auth', error);
+        });
+};
+
+export const startLogout = () => (dispatch) => {
+    return firebase
+        .auth
+        .signOut()
+        .then(() => {
+            console.log('Signed out');
+        })
 };
 
 export const startLoading = () => ({ type: Types.START_LOADING });
