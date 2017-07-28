@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 import { TodoList, mapStateToProps } from '../../components/Todo/TodoList';
 import { TodoItem } from '../../components/Todo';
 
-import Spinner from 'react-spinkit';
+import Spinner from '../../components/Spinner';
 
 describe('Todolist test suite', () => {
     it('Todolist should be true', () => {
@@ -58,7 +58,7 @@ describe('Todolist test suite', () => {
     });
 
     it('should render a loading spinner', () => {
-        const wrapper = mount(<TodoList classes={{}} todos={[]} loading={true} />);
+        const wrapper = shallow(<TodoList classes={{}} todos={[]} loading={true} />);
         expect(wrapper.find(Spinner)).toHaveLength(1);
     });
 
