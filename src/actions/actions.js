@@ -78,7 +78,7 @@ export const startLogin = () => () => {
 
 export const startLogout = () => (dispatch) => {
     return firebase
-        .auth
+        .auth()
         .signOut()
         .then(() => {
             console.log('Signed out');
