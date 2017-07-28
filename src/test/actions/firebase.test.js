@@ -1,6 +1,5 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { EventEmitter } from 'events';
 
 import * as actions from '../../actions/actions';
 
@@ -10,21 +9,6 @@ import { initialize } from '../../firebase/initialize';
 const createMockStore = configureMockStore([thunk]);
 
 describe('firebase actions tests', () => {
-
-    it('should not be happening omg', (done) => {
-        const emitter = new EventEmitter;
-
-        emitter.on('whatever', () => {
-            try {
-                expect({ a: 1 }).toMatchObject({ a: 1 });
-                done();
-            } catch (e) {
-                done.fail(e);
-            }
-        });
-
-        emitter.emit('whatever');
-    });
 
     const clearDatabase = function (done) {
         firebaseRef.child('todos').remove()
