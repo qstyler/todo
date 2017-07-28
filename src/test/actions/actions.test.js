@@ -1,12 +1,5 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-
 import * as actions from '../../actions/actions';
 import Types from '../../actions/Types';
-
-import { firebaseRef } from '../../firebase';
-
-const createMockStore = configureMockStore([thunk]);
 
 describe('actions test suite', () => {
     it('should set search text', () => {
@@ -25,7 +18,6 @@ describe('actions test suite', () => {
         });
     });
 
-
     it('should generate add todoS', () => {
         const todos = ['don\'t worry', 'be happy'];
         expect(actions.addTodos(todos)).toEqual({
@@ -39,98 +31,5 @@ describe('actions test suite', () => {
             type: Types.TOGGLE_SEARCH_ALL,
         });
     });
-
-    describe('firebase actions tests', () => {
-
-        const clearDatabase = function (done) {
-            firebaseRef.child('todos').remove()
-                .then(() => {
-                    firebaseRef.child('todos').push();
-                })
-                .then(done)
-                .catch((err) => done.fail(err))
-        };
-
-        beforeAll((done) => {
-            clearDatabase(done);
-        });
-
-        afterEach((done) => {
-            clearDatabase(done);
-        });
-
-
-        it('should should create todo and dispatch add todo', (done) => {
-
-            const store = createMockStore({});
-            const text = 'weeaboo';
-
-            return store
-                .dispatch(actions.startAddTodo(text))
-                .then(() => {
-                    const storeActions = store.getActions();
-                    expect(storeActions).toHaveLength(1);
-                    expect(storeActions[0]).toMatchObject(actions.addTodo({ text }));
-                    done();
-                })
-                .catch((e) => done.fail(e));
-        });
-
-        it('should dispatch ADD_TODOS action', (done) => {
-            const store = createMockStore();
-
-            store
-                .dispatch(actions.initialize())
-                .then(() => {
-                    const storeActions = store.getActions();
-                    expect(storeActions).toContainEqual(
-                        expect.objectContaining(
-                            actions.addTodos(
-                                expect.any(Array)
-                            )
-                        )
-                    );
-                    done();
-                })
-                .catch((err) => done.fail(err));
-        });
-
-
-        it('should call TODO_NOT_FOUND action on invalid id', (done) => {
-            const store = createMockStore();
-            const id = Math.ceil(999 * Math.random()).toString();
-
-            return store
-                .dispatch(actions.startSetTodoCompleted(id, true))
-                .then(() => {
-                    const storeActions = store.getActions();
-                    expect(storeActions).toHaveLength(1);
-                    expect(storeActions[0]).toMatchObject(actions.todoNotFound(id));
-                    done();
-                })
-                .catch((e) => done.fail(e));
-        });
-
-        it('should call UPDATE_TODO action', async (done) => {
-            const store = createMockStore({});
-            const text = 'weeaboo 2';
-            const completed = true;
-
-            const id = await store
-                .dispatch(actions.startAddTodo(text))
-                .then(() => store.getActions()[0].todo.id);
-
-            return store
-                .dispatch(actions.startSetTodoCompleted(id, completed))
-                .then(() => {
-                    const storeActions = store.getActions();
-                    expect(storeActions).toHaveLength(2);
-                    expect(storeActions[1]).toMatchObject(actions.updateTodo(id, { completed }));
-                    done();
-                }).catch((e) => done.fail(e));
-        });
-
-    });
-
 
 });
