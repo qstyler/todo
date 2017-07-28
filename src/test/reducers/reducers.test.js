@@ -103,4 +103,33 @@ describe('reducers test suite', () => {
 
     });
 
+    it('should add new todo_S_', () => {
+        const todos = [
+            { id: 1, text: 'don\'t worry' },
+            { id: 2, text: 'be happy' },
+        ];
+
+        const action = {
+            type: Types.TODO_NOT_FOUND,
+            id: 1,
+        };
+
+        const res = reducers.todos(df(todos), df(action));
+
+        expect(res).toHaveLength(1);
+        expect(res[0]).toMatchObject(todos[1]);
+
+    });
+
+    it('should just start or stop loading and no switching', () => {
+        expect(reducers.loading(true, { type: Types.START_LOADING })).toBeTruthy();
+        expect(reducers.loading(false, { type: Types.START_LOADING })).toBeTruthy();
+
+        expect(reducers.loading(true, { type: Types.STOP_LOADING })).toBeFalsy();
+        expect(reducers.loading(false, { type: Types.STOP_LOADING })).toBeFalsy();
+
+        expect(reducers.loading(true, { type: 'whatever' })).toBeTruthy();
+        expect(reducers.loading(false, { type: 'whatever' })).toBeFalsy();
+    });
+
 });

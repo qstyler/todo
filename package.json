@@ -36,7 +36,17 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "publish": "git push heroku"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!src/index.js",
+      "!src/registerServiceWorker.js",
+      "!**/Styles.js"
+    ]
   }
 }

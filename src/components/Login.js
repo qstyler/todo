@@ -7,7 +7,7 @@ import TiSocialGithub from 'react-icons/lib/ti/social-github';
 import { startLogin } from '../actions/actions';
 
 
-class Login extends Component {
+export class Login extends Component {
 
 
     constructor(props, context) {

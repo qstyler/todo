@@ -8,7 +8,7 @@ import { startLogout } from '../../actions/actions';
 
 import injectSheet from './Styles';
 
-class Header extends Component {
+export class Header extends Component {
 
     constructor(props, context) {
         super(props, context);

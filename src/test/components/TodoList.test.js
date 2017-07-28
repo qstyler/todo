@@ -1,8 +1,10 @@
 import React from 'react'
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
-import { TodoList } from '../../components/Todo/TodoList';
+import { TodoList, mapStateToProps } from '../../components/Todo/TodoList';
 import { TodoItem } from '../../components/Todo';
+
+import Spinner from 'react-spinkit';
 
 describe('Todolist test suite', () => {
     it('Todolist should be true', () => {
@@ -52,6 +54,22 @@ describe('Todolist test suite', () => {
             const wrapper = shallow(<TodoList classes={{}} todos={todos} searchText='2' />);
 
             expect(wrapper.find(TodoItem)).toHaveLength(1);
+        });
+    });
+
+    it('should render a loading spinner', () => {
+        const wrapper = mount(<TodoList classes={{}} todos={[]} loading={true} />);
+        expect(wrapper.find(Spinner)).toHaveLength(1);
+    });
+
+    it('should have a proper mapStateToProps function', () => {
+        const res = mapStateToProps({
+            searchAll: 'whatever',
+        });
+
+        expect(res).toMatchObject({
+            searchAll: true,
+            searchText: '',
         });
     });
 

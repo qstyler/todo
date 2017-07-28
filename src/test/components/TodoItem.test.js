@@ -2,7 +2,6 @@ import React from 'react'
 import { shallow } from 'enzyme';
 
 import { TodoItem } from '../../components/Todo/Todoitem';
-import { toggleTodo } from '../../actions/actions';
 
 describe('Todoitem test suite', () => {
     it('Todoitem should be true', () => {
@@ -37,6 +36,12 @@ describe('Todoitem test suite', () => {
         wrapper.find('input').simulate('change');
 
         expect(spy).toBeCalledWith(expect.any(Function));
+    });
+
+    it('should render completed at', () => {
+        const wrapper = shallow(<TodoItem completed={true} completedAt={1} id={'1'} dispatch={() => {}} text={''} classes={{}} />);
+        expect(wrapper).toIncludeText('Completed');
+
     });
 
 });

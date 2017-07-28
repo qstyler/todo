@@ -52,7 +52,7 @@ TodoList.propTypes = {};
 
 TodoList.defaultProps = {};
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
     loading: state.loading,
     todos: state.todos,
     searchText: state.searchText || '',
