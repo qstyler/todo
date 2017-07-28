@@ -7,7 +7,7 @@ class Spinner extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.containerSpinner}>
+            <div className={classes.spinner}>
                 <ExternalSpinner name="ball-scale-multiple" fadeIn="half" color="#93c3e2" />
                 <div />
             </div>
