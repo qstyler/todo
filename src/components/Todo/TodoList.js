@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import Spinner from 'react-spinkit';
+import Spinner from '../Spinner/Spinner';
 
 
 import TodoItem from './TodoItem';
@@ -22,10 +22,7 @@ export class TodoList extends Component {
         const ListOfTodos = () => {
             if (loading) {
                 return (
-                    <div className={classes.containerSpinner}>
-                        <Spinner name="ball-scale-multiple" fadeIn="half" color="#93c3e2" />
-                        <div />
-                    </div>
+                    <Spinner />
                 );
             } else if (!filteredTodos.length) {
                 return (<p className={classes.containerMessage}>Nothing to do</p>);

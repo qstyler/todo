@@ -25,14 +25,6 @@ export default injectSheet(Colors => ({
         borderTopColor: Colors.lightGreyBorder,
         padding: '1rem 1rem 0 1rem',
     },
-    containerSpinner: {
-        padding: '2rem 0',
-        width: 0,
-        margin: 'auto',
-        '& > :last-child': {
-            clear: 'both',
-        }
-    },
     containerMessage: {
         color: Colors.lightColor,
         margin: '2rem auto',
