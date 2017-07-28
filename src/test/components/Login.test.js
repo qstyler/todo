@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import { Login } from '../../components/Login';
+import { Login } from '../../components/Dashboard/Login';
 import { Button } from 'react-foundation';
 
 describe('Login test suite', () => {

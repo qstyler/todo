@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -29,6 +30,12 @@ export class Header extends Component {
                 </TopBarTitle>
                 <TopBarRight>
                     <Menu className={classes.titleMenu}>
+                        <MenuItem>
+                            <NavLink to="/">Dashboard</NavLink>
+                        </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/todos">Todos</NavLink>
+                        </MenuItem>
                         <MenuItem>
                             <a onClick={this.handleLogout}>Logout</a>
                         </MenuItem>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Row, Column } from 'react-foundation';
 
@@ -10,17 +10,18 @@ import jssNested from 'jss-nested';
 import camelCase from 'jss-camel-case';
 
 import Header from './components/Header/Header';
-import { Todo } from './components/Todo';
-import Login from './components/Login';
 
 import { configure } from './store/configure';
 
-// styles
+import firebase from './firebase';
+import { initialize } from './firebase/initialize';
+import { authorized } from './actions/actions';
+
 import 'foundation-sites/dist/css/foundation.min.css';
 import 'foundation-sites/dist/css/foundation-float.min.css';
 
 import Colors from './utils/Colors';
-import { initialize } from './firebase/initialize';
+import Routes from './Routes';
 
 const jss = createJss();
 jss.use(jssNested());
@@ -30,6 +31,9 @@ jss.use(camelCase());
 const store = configure();
 store.dispatch(initialize());
 
+firebase.auth().onAuthStateChanged((user) => {
+    store.dispatch(authorized(!!user));
+});
 
 class App extends Component {
     render() {
@@ -37,20 +41,16 @@ class App extends Component {
             <Provider store={store}>
                 <ThemeProvider theme={Colors}>
                     <JssProvider jss={jss}>
-                        <div>
-                            <Header title="My awesome todo app" />
-                            <Row>
-                                <Column small={11} medium={6} large={5} centerOnSmall>
-
-                                    <BrowserRouter>
-                                        <div>
-                                            <Route exact path="/" component={Login} />
-                                            <Route path="/todos" component={Todo} />
-                                        </div>
-                                    </BrowserRouter>
-                                </Column>
-                            </Row>
-                        </div>
+                        <BrowserRouter>
+                            <div>
+                                <Header title="My awesome todo app" />
+                                <Row>
+                                    <Column small={11} medium={6} large={5} centerOnSmall>
+                                        <Routes />
+                                    </Column>
+                                </Row>
+                            </div>
+                        </BrowserRouter>
                     </JssProvider>
                 </ThemeProvider>
             </Provider>

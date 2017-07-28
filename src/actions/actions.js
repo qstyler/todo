@@ -87,3 +87,7 @@ export const startLogout = () => (dispatch) => {
 
 export const startLoading = () => ({ type: Types.START_LOADING });
 export const stopLoading = () => ({ type: Types.STOP_LOADING });
+export const authorized = (authorized) => ({
+    type: Types.AUTHORIZED,
+    authorized
+});

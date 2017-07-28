@@ -55,3 +55,12 @@ export const loading = (state = false, action) => {
             return state;
     }
 };
+
+export const authorized = (state = 'undefined', action) => {
+    switch (action.type) {
+        case Types.AUTHORIZED:
+            return action.authorized;
+        default:
+            return state;
+    }
+};

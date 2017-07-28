@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import * as actions from '../../actions/actions';
 
-import { firebaseRef } from '../../firebase';
+import firebase, { firebaseRef } from '../../firebase';
 import { initialize } from '../../firebase/initialize';
 
 const createMockStore = configureMockStore([thunk]);
@@ -25,6 +25,10 @@ describe('firebase actions tests', () => {
 
     afterEach((done) => {
         clearDatabase(done);
+    });
+
+    afterAll(() => {
+        firebase.database().goOffline();
     });
 
 
