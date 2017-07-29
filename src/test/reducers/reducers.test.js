@@ -132,4 +132,16 @@ describe('reducers test suite', () => {
         expect(reducers.loading(false, { type: 'whatever' })).toBeFalsy();
     });
 
+    describe('auth reducer tests suite', () => {
+
+        it('should return waiting state on empty auth', () => {
+            expect(reducers.auth(undefined, { type: 'whatever' })).toMatchObject({ waiting: true });
+        });
+
+        it('should just return the state', () => {
+            expect(reducers.auth(undefined, { type: 'whatever' })).toMatchObject({ waiting: true });
+        });
+
+    });
+
 });

@@ -15,7 +15,7 @@ import { configure } from './store/configure';
 
 import firebase from './firebase';
 import { initialize } from './firebase/initialize';
-import { authorized } from './actions/actions';
+import { authorize, unauthorize } from './actions/actions';
 
 import 'foundation-sites/dist/css/foundation.min.css';
 import 'foundation-sites/dist/css/foundation-float.min.css';
@@ -32,7 +32,19 @@ const store = configure();
 store.dispatch(initialize());
 
 firebase.auth().onAuthStateChanged((user) => {
-    store.dispatch(authorized(!!user));
+    if (user) {
+        const auth = {
+            waiting: false,
+            authorized: true,
+            uid: user.uid,
+            displayName: user.displayName,
+        };
+
+        store.dispatch(authorize(auth));
+    } else {
+        store.dispatch(unauthorize())
+    }
+
 });
 
 class App extends Component {

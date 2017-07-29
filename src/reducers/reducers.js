@@ -56,10 +56,15 @@ export const loading = (state = false, action) => {
     }
 };
 
-export const authorized = (state = 'undefined', action) => {
+export const auth = (state = { waiting: true }, action) => {
     switch (action.type) {
-        case Types.AUTHORIZED:
-            return action.authorized;
+        case Types.AUTHORIZE:
+            return action.auth;
+        case Types.UNAUTHORIZE:
+            return {
+                waiting: false,
+                authorized: false,
+            };
         default:
             return state;
     }

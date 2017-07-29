@@ -9,10 +9,10 @@ import Spinner from './components/Spinner/Spinner';
 class Routes extends Component {
 
     render() {
-        const { authorized } = this.props;
+        const { auth } = this.props;
         const RedirectHome = () => <Redirect to="/" />;
 
-        if (authorized === 'undefined') {
+        if (auth.waiting) {
             return (
                 <Spinner />
             );
@@ -20,7 +20,7 @@ class Routes extends Component {
             return (
                 <div>
                     <Route exact path="/" component={Dashboard} />
-                    <Route path="/todos" component={authorized ? Todo : RedirectHome} />
+                    <Route path="/todos" component={auth.authorized ? Todo : RedirectHome} />
                 </div>
             );
         }
@@ -28,7 +28,7 @@ class Routes extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    authorized: state.authorized,
+    auth: state.auth,
 });
 
 export default withRouter(connect(mapStateToProps)(Routes));

@@ -32,4 +32,22 @@ describe('actions test suite', () => {
         });
     });
 
+    it('should authorize the user', () => {
+        const auth = {
+            waiting: false,
+            authorized: true,
+        };
+
+        expect(actions.authorize(auth)).toMatchObject({
+            type: Types.AUTHORIZE,
+            auth,
+        });
+    });
+
+    it('should unauthorize the user', () => {
+        expect(actions.unauthorize()).toMatchObject({
+            type: Types.UNAUTHORIZE
+        });
+    });
+
 });

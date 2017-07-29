@@ -5,12 +5,12 @@ import Login from './Login';
 
 export class Dashboard extends Component {
     render() {
-        const { authorized } = this.props;
+        const { auth } = this.props;
 
         return (
             <Callout>
                 {(() => {
-                    if (authorized) {
+                    if (auth.authorized) {
                         return <p>Hello, authorized user</p>;
                     } else {
                         return <Login />;
@@ -23,7 +23,7 @@ export class Dashboard extends Component {
 
 
 const mapStateToProps = (state) => ({
-    authorized: state.authorized,
+    auth: state.auth,
 });
 
 export default connect(mapStateToProps)(Dashboard);
