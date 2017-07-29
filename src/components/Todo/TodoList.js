@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import Spinner from '../Spinner/Spinner';
-
+import Spinner from '../Spinner';
 
 import TodoItem from './TodoItem';
 import injectSheet from './Styles';

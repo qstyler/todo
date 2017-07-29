@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Callout } from 'react-foundation';
+
 import Login from './Login';
+import Profile from './Profile';
 
 export class Dashboard extends Component {
     render() {
@@ -11,7 +13,7 @@ export class Dashboard extends Component {
             <Callout>
                 {(() => {
                     if (auth.authorized) {
-                        return <p>Hello, authorized user</p>;
+                        return <Profile />;
                     } else {
                         return <Login />;
                     }
@@ -26,4 +28,5 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
+// noinspection JSUnusedGlobalSymbols
 export default connect(mapStateToProps)(Dashboard);

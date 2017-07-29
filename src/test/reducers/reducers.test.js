@@ -138,8 +138,25 @@ describe('reducers test suite', () => {
             expect(reducers.auth(undefined, { type: 'whatever' })).toMatchObject({ waiting: true });
         });
 
-        it('should just return the state', () => {
-            expect(reducers.auth(undefined, { type: 'whatever' })).toMatchObject({ waiting: true });
+        it('should just return the auth object when authorized', () => {
+            const auth = {
+                one: 'one',
+                two: 'two',
+            };
+            expect(reducers.auth(undefined, { type: Types.AUTHORIZE, auth }))
+                .toMatchObject(auth);
+        });
+
+        it('should wait: false, authorized: false when logging out', () => {
+            const auth = {
+                one: 'one',
+                two: 'two',
+            };
+            expect(reducers.auth(undefined, { type: Types.UNAUTHORIZE, auth }))
+                .toMatchObject({
+                    waiting: false,
+                    authorized: false,
+                });
         });
 
     });

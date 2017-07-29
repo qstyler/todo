@@ -15,4 +15,5 @@ class Spinner extends Component {
     }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default injectSheet(Spinner);

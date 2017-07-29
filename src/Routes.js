@@ -3,8 +3,8 @@ import { Redirect, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Dashboard from './components/Dashboard';
-import Todo from './components/Todo/Todo';
-import Spinner from './components/Spinner/Spinner';
+import Todo from './components/Todo';
+import Spinner from './components/Spinner';
 
 class Routes extends Component {
 

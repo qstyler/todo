@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { TodoList, mapStateToProps } from '../../components/Todo/TodoList';
 import { TodoItem } from '../../components/Todo';
