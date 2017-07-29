@@ -11,9 +11,9 @@ const createMockStore = configureMockStore([thunk]);
 describe('firebase actions tests', () => {
 
     const clearDatabase = function (done) {
-        firebaseRef.child('todos').remove()
+        firebaseRef.child('users').remove()
             .then(() => {
-                firebaseRef.child('todos').push();
+                firebaseRef.child('users').push();
             })
             .then(done)
             .catch((err) => done.fail(err))
@@ -34,11 +34,17 @@ describe('firebase actions tests', () => {
 
     it('should should create todo and catch child_added', async (done) => {
 
-        const store = createMockStore({});
+        const uid = 1;
+        const store = createMockStore({
+            auth: { uid }
+        });
+
         const text = Math.random().toString();
 
-        firebaseRef
-            .child('todos')
+        const todosRef = firebaseRef
+            .child(`users/${uid}/todos`);
+
+        todosRef
             .limitToLast(1)
             .on('child_added', (snapshot) => {
                 try {
@@ -50,7 +56,7 @@ describe('firebase actions tests', () => {
                 } catch (error) {
                     done.fail(error);
                 }
-                firebaseRef.child('todos').off();
+                todosRef.off();
             });
 
         store
@@ -59,7 +65,10 @@ describe('firebase actions tests', () => {
     });
 
     it('should dispatch ADD_TODOS action', (done) => {
-        const store = createMockStore();
+        const uid = 1;
+        const store = createMockStore({
+            auth: { uid }
+        });
 
         store
             .dispatch(initialize())
@@ -79,7 +88,10 @@ describe('firebase actions tests', () => {
 
 
     it('should call TODO_NOT_FOUND action on invalid id', (done) => {
-        const store = createMockStore();
+        const uid = 1;
+        const store = createMockStore({
+            auth: { uid }
+        });
         const id = Math.ceil(999 * Math.random()).toString();
 
         return store
