@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^4.1.4",
+    "firebase": "^4.2.0",
     "foundation-sites": "^6.4.1",
     "jss-camel-case": "latest",
     "jss-nested": "latest",
