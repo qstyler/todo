@@ -38,7 +38,9 @@ firebase.auth().onAuthStateChanged((user) => {
             authorized: true,
             uid: user.uid,
             displayName: user.displayName,
+            photoURL: user.photoURL,
         };
+        console.log(auth);
 
         store.dispatch(authorize(auth));
     } else {

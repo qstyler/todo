@@ -3,14 +3,18 @@ import { connect } from 'react-redux';
 
 export class Profile extends Component {
     render() {
+        const { displayName, photoURL } = this.props.auth;
         return (
             <div>
-                <p>Hello, authorized user</p>
+                <img src={photoURL} />
+                <p>Hello, {displayName}!</p>
             </div>
         );
     }
 }
 
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+});
 export default connect(mapStateToProps)(Profile);
