@@ -7,25 +7,13 @@ import {
     updateTodo,
 } from '../actions/actions';
 
-export const initialize = () => (dispatch) => {
+export const initialize = () => (dispatch, getState) => {
     let newItems = false;
 
-    const todoRef = firebaseRef.child('todos');
+    const uid = getState().auth.uid;
+    const todoRef = firebaseRef.child(`users/${uid}/todos`);
 
     dispatch(startLoading());
-
-    const update = (snapshot) => {
-        const value = snapshot.val() || {};
-        const items = Object.values(value);
-        const ids = Object.keys(value);
-
-        const todos = items.map((item, i) => ({ id: ids[i], ...item }));
-
-        dispatch(addTodos(todos));
-        setTimeout(() => dispatch(stopLoading()));
-
-        newItems = true;
-    };
 
     todoRef.on('child_changed', (snapshot) => {
         const updates = snapshot.val();
@@ -41,6 +29,19 @@ export const initialize = () => (dispatch) => {
 
         dispatch(addTodo({ id, ...updates }));
     });
+
+    const update = (snapshot) => {
+        const value = snapshot.val() || {};
+        const items = Object.values(value);
+        const ids = Object.keys(value);
+
+        const todos = items.map((item, i) => ({ id: ids[i], ...item }));
+
+        dispatch(addTodos(todos));
+        setTimeout(() => dispatch(stopLoading()));
+
+        newItems = true;
+    };
 
     return todoRef.once('value').then(update);
 };

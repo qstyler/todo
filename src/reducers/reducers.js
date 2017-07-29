@@ -28,7 +28,6 @@ export const todos = (state = [], action) => {
             ];
         case Types.ADD_TODOS:
             return [
-                ...state,
                 ...action.todos,
             ];
         case Types.UPDATE_TODO:

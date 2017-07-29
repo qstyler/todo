@@ -6,7 +6,7 @@ export class Profile extends Component {
         const { displayName, photoURL } = this.props.auth;
         return (
             <div>
-                <img src={photoURL} />
+                <img alt={displayName} src={photoURL} />
                 <p>Hello, {displayName}!</p>
             </div>
         );

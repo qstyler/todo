@@ -27,9 +27,7 @@ const jss = createJss();
 jss.use(jssNested());
 jss.use(camelCase());
 
-
 const store = configure();
-store.dispatch(initialize());
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -40,9 +38,9 @@ firebase.auth().onAuthStateChanged((user) => {
             displayName: user.displayName,
             photoURL: user.photoURL,
         };
-        console.log(auth);
 
         store.dispatch(authorize(auth));
+        store.dispatch(initialize());
     } else {
         store.dispatch(unauthorize())
     }
